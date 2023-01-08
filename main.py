@@ -109,8 +109,32 @@ def search():
     result.title('Search Result')
     result.geometry('1100x400')
 
+    # Setup of Scrollbars in X and Y directions
+    scrollbary = ttk.Scrollbar(result, orient=tk.VERTICAL)
+    scrollbarx = ttk.Scrollbar(result, orient=tk.HORIZONTAL)
+    treeview = ttk.Treeview(result, columns=headers, show='headings')
+    treeview.place(x=40,y=40,width=1000,height=200)
+    treeview.configure(yscrollcommand=scrollbary.set, xscrollcommand = scrollbarx.set)
+    result.update()
+    scrollbary.configure(command=treeview.yview)
+    scrollbarx.configure(command=treeview.xview)
 
+    scrollbary.place(x=1040,y=40,width=20,height=200)
+    scrollbarx.place(x=40,y=240,width=1000,height=20)
 
+    # Display data in treeview
+    treeview.configure(columns=headers)
+    for index in headers:
+        treeview.heading(index, text=index.value,anchor=W)
+        treeview.column(index,stretch=NO,width=120)
+    for content in rows:
+        treeview.insert('', tk.END, values=content)
+
+    re_search=Button(result, text="Return to Search", command=back_to_search,font=10)
+    re_search.place(relx=0.25,rely=0.855)
+    exit_2 = Button(result, text="Close", command=search_close,font=10)
+    exit_2.place(relx=0.6, rely=0.855)
+    
 Button(main,text="Search",command=search).place(x=230, y=400)
 # Button for closing
 Button(main, text="Exit", command=main.destroy).place(x=460, y=400)
