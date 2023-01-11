@@ -87,13 +87,12 @@ def search():
                     cols=[]
         itr = itr + 1
 
-    #print(len(rows))
-
-    #display
+   #display
     main.withdraw()
     headers = []
     for header in sheet[1]:
-        headers.append(header)
+        if len(headers)<22:
+            headers.append(header)
 
     result = tk.Tk()
     result.title('Search Result')
@@ -103,22 +102,23 @@ def search():
     scrollbary = ttk.Scrollbar(result, orient=tk.VERTICAL)
     scrollbarx = ttk.Scrollbar(result, orient=tk.HORIZONTAL)
     treeview = ttk.Treeview(result, columns=headers, show='headings')
-    treeview.place(x=40,y=40,width=1000,height=250)
+    treeview.place(x=40,y=40,width=1000,height=200)
     treeview.configure(yscrollcommand=scrollbary.set, xscrollcommand = scrollbarx.set)
     result.update()
     scrollbary.configure(command=treeview.yview)
     scrollbarx.configure(command=treeview.xview)
 
-    scrollbary.place(x=740,y=40,width=20,height=250)
-    scrollbarx.place(x=40,y=290,width=1000,height=20)
+    scrollbary.place(x=1040,y=40,width=20,height=200)
+    scrollbarx.place(x=40,y=240,width=1000,height=20)
 
     # Display data in treeview
     treeview.configure(columns=headers)
     for index in headers:
         treeview.heading(index, text=index.value,anchor=W)
-        treeview.column(index,stretch=NO,width=80)
+        treeview.column(index,stretch=NO,width=120)
     for content in rows:
         treeview.insert('', tk.END, values=content)
+
 
     """
     #columns = ('Project #', 'Company Name', 'Location')
@@ -197,7 +197,6 @@ def search():
                          h=column_box[3])
         row_to_change=iid_index
         col_to_change=column_index
-
 
 
     def on_focus_out():
