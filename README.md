@@ -10,4 +10,4 @@ Develop a user .exe application of Database management, to enable Record searchi
     3. Enable scrollbars if the required space of results exceeds table (Treeview) size.
 
 
-Data is from FPS Corp Inc., all values have been changed or disordered for data security, and will not be used for any purpose.
+The idea of Database, attributes, and tuples comes from my work at FPS Corp Inc., however all values or contents have been changed or disordered for data security, and will not be used for any other purpose.
