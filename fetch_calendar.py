@@ -41,7 +41,6 @@ def fetch_calendar():
     "populate dictionary of meetings "
     apptDict = {}
 
-    item = 0
     for indx, a in enumerate(appts):
         subject_temp = str(a.Subject)
         if subject_temp in (excluded_subjects):
@@ -66,9 +65,8 @@ def fetch_calendar():
         duration = str(number_day)
         end_date = a.Start+datetime.timedelta(days=int(number_day))
 
-        apptDict[item] = { "project_id": project_id, "Duration": duration,  "Subject": subject, "Start_Date":start_date.strftime("%m/%d/%y"),"Organizer": organizer, "End_Date":end_date.strftime("%m/%d/%y")
+        apptDict[indx] = { "project_id": project_id, "Duration": duration,  "Subject": subject, "Start_Date":start_date.strftime("%m/%d/%y"),"Organizer": organizer, "End_Date":end_date.strftime("%m/%d/%y")
                           }
-        item = item +1
 
     """Group the results by date"""
     "convert discretionary to dataframe and group_by Date"
