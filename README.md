@@ -8,3 +8,6 @@ Develop a user .exe application of Database management, to enable Record searchi
     1. Accept single or multiple elements searching
     2. Search regards of Lower or Capital Cases
     3. Enable scrollbars if the required space of results exceeds table (Treeview) size.
+
+
+Data is from FPS Corp Inc., all values have been changed or disordered for data security, and will not be used for any purpose.
