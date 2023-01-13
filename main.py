@@ -12,7 +12,7 @@ from openpyxl import Workbook
 #import cv2
 from tkinter import ttk
 from tkinter.messagebox import showinfo
-from search import *
+from search import search
 from fetch_calendar import *
 
 
