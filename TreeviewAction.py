@@ -26,30 +26,3 @@ def selectItemtoEdit(event):
     treeview.bind("<Button-1>", on_focus_out)
 
 
-def edit():
-    # Get selected item to Edit
-    prject_id_to_change=str(rows[row_to_change][0])
-    print(prject_id_to_change)
-    itr_row=2
-    for cell_2 in sheet.iter_rows(min_row=2, max_row=sheet.max_row, min_col=1, max_col=22, values_only=FALSE):
-        if prject_id_to_change in str(sheet[itr_row][0].value):
-            sheet.cell(row=itr_row,column=col_to_change+1).value = value_to_change
-            file.save(excel_path)
-            break
-
-        itr_row = itr_row + 1
-
-    #update_file()
-    result.destroy()
-    search()
-
-def delete():
-    # Get selected item to Delete
-    selected_item = treeview.selection()[0]
-    treeview.delete(selected_item)
-
-
-def update_file():
-    # Get selected item to Delete
-    selected_item = treeview.selection()[0]
-    treeview.delete(selected_item)
