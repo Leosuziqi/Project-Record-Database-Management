@@ -10,6 +10,8 @@ Develop a user .exe application of Database management, to enable Record searchi
     3. Enable scrollbars if the required space of results exceeds table (Treeview) size.
 3. Editing:
     1. Available to change, add or delete contents in cells.
+    2. Enacle "Double Click" to select cell and insert words and the same location.
+    3. Update on original .xlsx file
     
     
 ## Development
