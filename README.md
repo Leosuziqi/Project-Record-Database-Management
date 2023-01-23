@@ -23,11 +23,11 @@ The pathway of my previous work is sequentially as briefly described in the diag
     - The flexibility is limited if I 'd like to add more functions,
     - The Product Time (Responding time) gets longer when Database gets larger.
 
-<img src="Sequential%20Coding.JPG" width="600">
+<img src="Pictures/Sequential%20Coding.JPG" width="600">
 
 As a result, I decided to try OOP programing so it can handle the large database in this case. The draft concept of classes and constructors is shown below. Codes can be found in OOP directory.
 
-<img src="OOP.JPG" width="700">
+<img src="Pictures/OOP.JPG" width="700">
 
 SQL server 
 
