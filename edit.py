@@ -158,6 +158,108 @@ def search():
     def search_close():
         main.destroy()
         result.destroy()
+        
+    #command for back_to_search button
+    def back_to_search():
+        main.deiconify()
+        result.destroy()
+
+    # command for search_close button
+    def search_close():
+        main.destroy()
+        result.destroy()
+        
+    def edit():
+        # Get selected item to Edit
+        for row_changes in changed_rows:
+            itr_row=2
+            for cell_2 in sheet.iter_rows(min_row=2, max_row=sheet.max_row, min_col=1, max_col=22, values_only=FALSE):
+                if str(row_changes[0]) in str(sheet[itr_row][0].value):
+                    sheet.cell(row=itr_row,column=row_changes[1]+1).value = row_changes[2]
+                    break
+
+                itr_row = itr_row + 1
+
+
+        update_file()
+        result.destroy()
+        search()
+
+    def selectItemtoEdit(event):
+        global row_to_change
+        global col_to_change
+        global value_to_change
+        region = treeview.identify_region(event.x,event.y)
+        if region not in ("tree","cell"):
+            return
+
+        column = treeview.identify_column(event.x)
+        column_index=int(column[1:])-1
+        iid=treeview.focus()
+        iid_index = int(iid[1:])-1
+        selected_value=treeview.item(iid)
+        selected_text=selected_value.get("values")[column_index]
+
+        #print(selected_text)
+
+        column_box=treeview.bbox(iid,column)
+        entry_edit= tk.Entry(result)
+
+        entry_edit.editing_column_index=column_index
+        entry_edit.editing_row_index=iid_index
+
+        """
+        def on_enter(self):
+            global value_to_change
+            value_to_change=entry_edit.get()
+
+            entry_edit.destroy()
+        """
+
+        def on_focus_out(self):
+            # change table view
+            if entry_edit.winfo_exists():
+                new_text = entry_edit.get()
+
+                selected_iid = entry_edit.editing_row_index
+                selected_column = entry_edit.editing_column_index
+
+                print(1)
+                #print(selected_iid)
+                #print(selected_column)
+                if selected_column == -1:
+                    treeview.item(selected_iid,text=new_text)
+                else:
+                    current_value = treeview.item(treeview.selection())['values']
+
+                    if current_value[selected_column] != new_text:
+                        current_value[selected_column] = new_text
+                        treeview.item(treeview.selection(),values=current_value)
+
+                        # save to the list of changes
+                        #chnages in form of [project_ID,column_to_change,value_to_change]
+                        changes = [current_value[0], selected_column, new_text]
+                        changed_rows.append(changes)
+                        print(changed_rows)
+
+                entry_edit.destroy()
+
+        entry_edit.insert(0,selected_text)
+        #Press "Enter" to save changes
+        entry_edit.bind("<Return>",on_focus_out)
+
+        entry_edit.place(x=column_box[0]+40,
+                         y=column_box[1]+40,
+                         w=column_box[2],
+                         h=column_box[3])
+        row_to_change = iid_index
+        col_to_change = column_index
+
+        #Click other area to save changes
+        treeview.bind("<Button-1>", on_focus_out)
+        scrollbary.bind("<Button-1>", on_focus_out)
+        scrollbarx.bind("<Button-1>", on_focus_out)
+
 
     def edit():
         # Get selected item to Edit
