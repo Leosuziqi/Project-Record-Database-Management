@@ -4,15 +4,22 @@ Database Management with Python and SQL
 ## Introduction
 Develop a user .exe application of Database management, to enable Record searching, entry adding and editing without manipulating in Excel. Requirements including:
 1. Create an interface of ADD, SEARCH and EDIT functions.
+
+<img src="Pictures/homepage.JPG" width="400">
+
 2. Searching:  (search.py)
     1. Accept single or multiple elements searching
     2. Search regards of Lower or Capital Cases
     3. Enable scrollbars if the required space of results exceeds table (Treeview) size.
+    
+<img src="Pictures/search.JPG" width="400">
+
 3. Editing: (edit.py)
     1. Available to change, add or delete contents in cells.
     2. Enacle "Double Click" to select cell and insert words and the same location.
     3. Update on original .xlsx file
-    
+
+<img src="Pictures/edit.JPG" width="400">
     
 ## Development
 
