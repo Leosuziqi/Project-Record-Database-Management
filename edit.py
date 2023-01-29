@@ -21,9 +21,12 @@ main.config(highlightbackground="black", highlightthickness=2)
 global row_to_change
 global col_to_change
 global value_to_change
-"""
+
+#Load file
+excel_path = r".\Freezer Job Record.xlsx"
+#excel_path = r"I:\Support Group\Service\Freezer Job Record.xlsx"
+
 #File not Existed error
-file = pathlib.Path("test.xlsx")
 if file.exists():
     pass
 else:
@@ -33,12 +36,7 @@ else:
     error_page.geometry("200*100")
     error_label = tk.Label(error_page, text="File not Existed.")
     error_label.place(anchor="center")
-"""
-#Load file
-excel_path = r".\Freezer Job Record.xlsx"
-#excel_path = r"I:\Support Group\Service\Freezer Job Record.xlsx"
-#cols = []
-
+    
 file = openpyxl.load_workbook(excel_path, data_only=True)
 sheet = file['Freezer Job Record']
 
@@ -69,8 +67,7 @@ def search():
 
     #Save every matched row into cols, then append all cols to rows[] as the searched result
     cols=[]
-    itr=2   #start searching from row 2
-    for cell in sheet.iter_rows(min_row=2,max_row=sheet.max_row,min_col=1,max_col=22,values_only=FALSE):    #Iteration in rows
+    for index, cell in sheet.iter_rows(min_row=2,max_row=sheet.max_row,min_col=1,max_col=22,values_only=FALSE):    #Iteration in rows
         #values_only?
         if not (id_flag|Company_flag|Location_flag):
             continue
@@ -85,11 +82,10 @@ def search():
                         cols.append(index.value)
                     rows.append(cols)
                     cols=[]
-        itr = itr + 1
 
     #print(len(rows))
 
-    #display
+    #display the homepage
     main.withdraw()
     headers = []
     changed_rows = []
@@ -172,14 +168,10 @@ def search():
     def edit():
         # Get selected item to Edit
         for row_changes in changed_rows:
-            itr_row=2
-            for cell_2 in sheet.iter_rows(min_row=2, max_row=sheet.max_row, min_col=1, max_col=22, values_only=FALSE):
+            for ,index, cell_2 in sheet.iter_rows(min_row=2, max_row=sheet.max_row, min_col=1, max_col=22, values_only=FALSE):
                 if str(row_changes[0]) in str(sheet[itr_row][0].value):
                     sheet.cell(row=itr_row,column=row_changes[1]+1).value = row_changes[2]
                     break
-
-                itr_row = itr_row + 1
-
 
         update_file()
         result.destroy()
@@ -193,6 +185,7 @@ def search():
         if region not in ("tree","cell"):
             return
 
+        #Record Clicked cell location
         column = treeview.identify_column(event.x)
         column_index=int(column[1:])-1
         iid=treeview.focus()
@@ -216,6 +209,7 @@ def search():
             entry_edit.destroy()
         """
 
+        #When click outside of edited cell
         def on_focus_out(self):
             # change table view
             if entry_edit.winfo_exists():
@@ -224,7 +218,7 @@ def search():
                 selected_iid = entry_edit.editing_row_index
                 selected_column = entry_edit.editing_column_index
 
-                print(1)
+                #print(1)
                 #print(selected_iid)
                 #print(selected_column)
                 if selected_column == -1:
@@ -264,15 +258,11 @@ def search():
     def edit():
         # Get selected item to Edit
         for row_changes in changed_rows:
-            itr_row=2
-            for cell_2 in sheet.iter_rows(min_row=2, max_row=sheet.max_row, min_col=1, max_col=22, values_only=FALSE):
+            for index, cell_2 in sheet.iter_rows(min_row=2, max_row=sheet.max_row, min_col=1, max_col=22, values_only=FALSE):
                 if str(row_changes[0]) in str(sheet[itr_row][0].value):
                     sheet.cell(row=itr_row,column=row_changes[1]+1).value = row_changes[2]
                     break
-
-                itr_row = itr_row + 1
-
-
+                    
         update_file()
         result.destroy()
         search()
