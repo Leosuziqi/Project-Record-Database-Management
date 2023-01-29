@@ -16,8 +16,10 @@ Develop a user .exe application of Database management, to enable Record searchi
 
 3. Editing: (edit.py)
     1. Available to change, add or delete contents in cells.
-    2. Enacle "Double Click" to select cell and insert words and the same location.
-    3. Update on original .xlsx file
+    2. Enable "Double Click" to select cell and insert words and the same location.
+    3. Able to make mutiple changes in one table and save all of changes.
+    4. Update to original .xlsx file.
+    5. Return to Search page.
 
 <img src="Pictures/edit.JPG" width="400">
     
