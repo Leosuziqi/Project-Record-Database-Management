@@ -1,3 +1,8 @@
+import win32com.client, datetime
+from datetime import date
+from dateutil.parser import *
+import calendar
+import pandas as pd
 # Data fetching from Excel files
 import pathlib
 # Author: Leo Su
@@ -12,8 +17,51 @@ from openpyxl import Workbook
 #import cv2
 from tkinter import ttk
 from tkinter.messagebox import showinfo
-from search import search
 from fetch_calendar import *
+import os, os.path
+import warnings
+
+start_date_column = 48
+end_date_column = 49
+start_flag=0
+if(start_flag==0):
+    xl = win32com.client.DispatchEx("Excel.Application")
+    wb = xl.workbooks.open("C:\\Users\\leo.su\\PycharmProjects\\outlook\\demo\\New Project.xlsm")
+    xl.Visible = True
+    xl.run("'New Project.xlsm'!update_from_master")
+
+    wb.SaveAs(Filename="C:\\Users\\leo.su\\PycharmProjects\\outlook\\demo\\temp.xlsm")
+    wb.Close()
+    xl.Quit()
+    print("VBA Done.")
+    #get_outlood_data
+    outlook_data = fetch_calendar()
+    #print(outlook_data)
+    #output=fetch_calendar()
+    print("Calendar fetched.")
+    #Load file
+    excel_path = ".\\demo\\temp.xlsm"
+    #excel_path = r"I:\Support Group\Service\Freezer Job Record.xlsx"
+    file = openpyxl.load_workbook(excel_path,data_only=True, keep_vba=True)
+    sheet = file['New Projects']
+    #print(2)
+    itr_row = 2
+
+    for cell_2 in sheet.iter_rows(min_row=2, max_row=1000, min_col=1,max_col=56, values_only=FALSE):
+        for index, row in outlook_data.iterrows():
+            #print(itr_row)
+            if str(row['project_id']) == str(sheet[itr_row][3].value):
+                print(row['project_id'])
+                #s=sheet.cell(row=itr_row, column=start_date_column + 1).value
+                sheet.cell(row=itr_row, column=start_date_column).value = (str(row['Start_Date']))
+                sheet.cell(row=itr_row, column=end_date_column).value = row['End_Date']
+            break
+        itr_row=itr_row+1
+
+    warnings.simplefilter("ignore")
+    file.save(".\\demo\\modified New Project.xlsm")
+    start_flag=1
+
 
 
 main=Tk()
