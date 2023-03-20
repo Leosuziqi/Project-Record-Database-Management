@@ -1,17 +1,15 @@
-# Data fetching from Excel files
-import pathlib
 # Author: Leo Su
 # Data 19-Dec-2022
 
-from tkinter import *
-import tkinter as tk
 import numpy as np
-import openpyxl,xlrd
-from tkinter import Tk, mainloop,TOP
+import xlrd
+from tkinter import Tk, mainloop,TOP, ttk
 from openpyxl import Workbook
 #import cv2
-from tkinter import ttk
 from tkinter.messagebox import showinfo
+# Data fetching from Excel files
+import pathlib
+
 #Search Function
 def search():
     #search
@@ -39,7 +37,7 @@ def search():
 
     #Save every matched row into cols, then append all cols to rows[] as the searched result
     cols=[]
-    itr=2   #start searching from row 2
+    itr=2   #in case 
     for cell in sheet.iter_rows(min_row=2,max_row=sheet.max_row,min_col=1,max_col=22,values_only=FALSE):    #Iteration in rows
         #values_only?
         if not (id_flag|Company_flag|Location_flag):
