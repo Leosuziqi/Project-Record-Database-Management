@@ -1,25 +1,23 @@
+# Author: Leo Su
+# Data 19-Dec-2022
+
+import numpy as np
+import openpyxl,xlrd
+from tkinter import Tk, mainloop,TOP, ttk
+from openpyxl import Workbook
+#import cv2
+from tkinter.messagebox import showinfo
+from fetch_calendar import *
+import os, os.path
+import warnings
 import win32com.client, datetime
 from datetime import date
 from dateutil.parser import *
 import calendar
 import pandas as pd
+
 # Data fetching from Excel files
 import pathlib
-# Author: Leo Su
-# Data 19-Dec-2022
-
-from tkinter import *
-import tkinter as tk
-import numpy as np
-import openpyxl,xlrd
-from tkinter import Tk, mainloop,TOP
-from openpyxl import Workbook
-#import cv2
-from tkinter import ttk
-from tkinter.messagebox import showinfo
-from fetch_calendar import *
-import os, os.path
-import warnings
 
 ## Run Excel Macro
 xl = win32com.client.DispatchEx("Excel.Application")
